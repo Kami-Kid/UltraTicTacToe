@@ -212,17 +212,22 @@ function handleMove(metaCell){
 
 
 function saveBoard(){
-    if(checkWin() !== -1){
-        let temp = "board"
-        for(i=0;i<currSkipped.length;i++){
-            temp+= "["+currSkipped[i]+"]"
-        }
-        temp += " = " + checkWin()
-        eval(temp)
+    while(checkWin() !== -1){
+        saveWin(winningPlayer)
+        currBoard = [...board]
     }
-    currBoard = [...board]
+    
     currLayer = 1
     currSkipped = []
+}
+
+function saveWin(winningPlayer){   
+    let temp = "board"
+    for(i=0;i<currSkipped.length;i++){
+        temp+= "["+currSkipped[i]+"]"
+    }
+    temp += " = " + checkWin()
+    eval(temp)
 }
 
 function checkWin(){
@@ -239,11 +244,11 @@ function checkWin(){
     }
 
     if(currBoard[0]===currBoard[4] && currBoard[0] === currBoard[8] && typeof(currBoard[0]) == "number"&& currBoard[0]!==-1){
-        print("diag tl")
+        //print("diag tl")
         return currBoard[0]
     }
     if(currBoard[2]===currBoard[4] && currBoard[2] === currBoard[6] && typeof(currBoard[2]) == "number"&& currBoard[2]!==-1){
-        print("diag tr")
+        //print("diag tr")
         return currBoard[2]
     }
     return -1
