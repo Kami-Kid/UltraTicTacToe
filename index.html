@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
-            *{
-                padding: 0%;
-                border: 0%;
-                margin: 0%;
-            }
-            body{
-                overflow: hidden;
-            }
-        </style>
-        <title>Tic Tac Toe but odd</title>
-    </head>
-    <body>
-        <Canvas id="Canvas" width="1920" height="941"></Canvas>
-        <script> const print = (msg) =>{console.log(msg)}; </script>
-        <script src = "main.js"></script>
-        <p> loaded properly </p>
+
+<head>
+    <style>
+        * {
+            padding: 0%;
+            border: 0%;
+            margin: 0%;
+        }
+        
+        body {
+            overflow: hidden;
+        }
+    </style>
+    <title>Tic Tac Toe but odd</title>
+</head>
+
+<body>
+    <Canvas id="Canvas" width="1920" height="941"></Canvas>
+
+    <div style="left: 950px; position: absolute; top: 200px; user-select: none; width: 250px;">
+        <p>
+            Click on a cell to change that mark that cell </br>
+            Click on an inner board to zoom into that board </br>
+            Press Enter to Zoom Out </br>
+            If you win a game, your colour will be shown on the large grid for a second then you will be prompted to select any cell (including ones within other grids) to convert into a new grid </br>
+            Note: with many layers, some detail is removed for performance reasons
+        </p>
+        <button onclick="regenerateBoard()">Stalemate reset</button>
+    </div>
+
+    <script>
+        const print = (msg) => {
+            console.log(msg)
+        };
+    </script>
+    <script src="main.js"></script>
 </body>
+
 </html>
