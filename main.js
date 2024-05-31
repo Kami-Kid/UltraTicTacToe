@@ -286,7 +286,7 @@ function saveBoard(iters = 0, moveMade) {
         setTimeout(() => {
             won = -1;
             regenerateBoard();
-            print("abacus")
+            selecting = 1
         }, 1500)
     }
     return
