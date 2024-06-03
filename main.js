@@ -361,7 +361,6 @@ function regenerateBoard() {
     currLayer = 1
     currMoves = []
     lastMove = []
-    selecting = 0
     currBoard = JSON.parse(JSON.stringify(board))
     currPlayer = 0
 
