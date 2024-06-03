@@ -10,11 +10,11 @@ context.strokeStyle = 'black';
 canvas.setAttribute("width", baseWidth)
 canvas.setAttribute("height", baseWidth)
 
-const maxDepth = 2
-const players = 2 //max 8
-const startLayers = 1
+let maxDepth = 2
+let players = 2 //max 8
+let startLayers = 1
 const progressMode = 1
-const ruleSet = 1
+let ruleSet = 1
     /*
     0: none
     1: tries to force metacell- normal ultimate when used with startlayer 2
@@ -360,6 +360,7 @@ function regenerateBoard() {
     }
     currLayer = 1
     currMoves = []
+    lastMove = []
     selecting = 0
     currBoard = JSON.parse(JSON.stringify(board))
     currPlayer = 0
