@@ -28,6 +28,7 @@
             Note: with many layers, some detail is removed for performance reasons
         </p>
         <button onclick="regenerateBoard()">Stalemate reset</button>
+        <input type="range" min="0" max="7" onchange="maxdepth = document.getElementById('mdRange').value"></input>
     </div>
 
     <script>
