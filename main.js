@@ -28,7 +28,7 @@ let currLayer = 1
 let currMoves = []
 let upgradedCells = [] // will be full of small arrays like currMoves for where individual cells should be set
 let won = -1
-let selecting = 0
+let selecting = 4
 let staleMate = 0
 let lastMove = []
 
@@ -224,14 +224,14 @@ function handleClicks(e) {
 function handleMove(metaCell) {
 
     if (currBoard[metaCell] === -1) { //empty normal cell
-        if (selecting) { //if a player has won
+        if (selecting>0) { //if a player has won
             currMoves.push(metaCell)
             if (currMoves.length > maxDepth) {
                 currMoves.pop()
                 return
             }
             upgradedCells.push(currMoves)
-            selecting = 0
+            selecting -= 1
             regenerateBoard()
             return
         }
