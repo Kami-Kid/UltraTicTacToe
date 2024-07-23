@@ -28,9 +28,15 @@ let currLayer = 1
 let currMoves = []
 let upgradedCells = [] // will be full of small arrays like currMoves for where individual cells should be set
 let won = -1
-let selecting = 4
+let selecting = 0
 let staleMate = 0
 let lastMove = []
+
+function setSelecting(x) {
+    selecting = x
+
+    document.getElementById("upgrading").value = selecting
+}
 
 const colours = ["red", "blue", "pink", "orange", "grey", "magenta", "purple", "lime"]
 
@@ -224,14 +230,14 @@ function handleClicks(e) {
 function handleMove(metaCell) {
 
     if (currBoard[metaCell] === -1) { //empty normal cell
-        if (selecting>0) { //if a player has won
+        if (selecting > 0) { //if a player has won
             currMoves.push(metaCell)
             if (currMoves.length > maxDepth) {
                 currMoves.pop()
                 return
             }
             upgradedCells.push(currMoves)
-            selecting -= 1
+            setSelecting(selecting - 1)
             regenerateBoard()
             return
         }
@@ -262,7 +268,7 @@ function saveBoard(iters = 0, moveMade) {
 
         if (checkWin() !== -1) {
             won = winningCell
-            selecting = 1
+            setSelecting(1)
             setTimeout(() => {
                 won = -1;
                 regenerateBoard()
@@ -282,11 +288,10 @@ function saveBoard(iters = 0, moveMade) {
     currMoves = []
     if (checkWin() !== -1) {
         won = checkWin()
-        selecting = 1
         setTimeout(() => {
             won = -1;
             regenerateBoard();
-            selecting = 1
+            setSelecting(1)
         }, 1500)
     }
     return
