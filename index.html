@@ -12,6 +12,10 @@
         body {
             overflow: hidden;
         }
+        
+        #upgrading {
+            width: 30px;
+        }
     </style>
     <title>Tic Tac Toe but odd</title>
 </head>
@@ -28,7 +32,11 @@
             Note: with many layers, some detail is removed for performance reasons
         </p>
         <button onclick="regenerateBoard()">Stalemate reset</button>
-        <input type="range" min="0" max="7" onchange="maxDepth = Number(document.getElementById('mdRange').value)" id="mdRange"></input>
+        <input type="number" value="2" min="0" max="7" onchange="maxDepth = Number(document.getElementById('mdRange').value)" id="mdRange">&#60Max Depth</input><br>
+        <button onclick=" upgradedCells=[];regenerateBoard();">Full reset</button>
+        <input type="number" value="1" min="0" max="7" onchange="startLayers = Number(document.getElementById('startDepthRange').value)" id="startDepthRange">&#60Start Depth</input><br>
+        <p>Cells To Upgrade: </p>
+        <input type="number" value="0" min="0" onchange="selecting = Number(this.value)" id="upgrading">
     </div>
 
     <script>
@@ -36,7 +44,7 @@
             console.log(msg)
         };
     </script>
-    <script src="main.js"></script>
+    <script src="newmain.js"></script>
 </body>
 
 </html>
