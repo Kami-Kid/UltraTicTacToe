@@ -15,10 +15,11 @@ let players = 2 //max 8
 let startLayers = 1
 const progressMode = 1
 let ruleSet = 1
-    /*
-    0: none
-    1: tries to force metacell- normal ultimate when used with startlayer 2
-    */
+let currMaxLayer = 1;
+/*
+0: none
+1: tries to force metacell- normal ultimate when used with startlayer 2
+*/
 let highlightedCell = [900, 900]
 let currPlayer = 0
 
@@ -236,6 +237,7 @@ function handleMove(metaCell) {
                 currMoves.pop()
                 return
             }
+            currMaxLayer += currMoves.length > currMaxLayer
             upgradedCells.push(currMoves)
             setSelecting(selecting - 1)
             regenerateBoard()
@@ -404,3 +406,29 @@ regenerateBoard()
 
 currBoard = [...board]
 setInterval(update, 25)
+
+function generateSaveGame() {
+    regenerateBoard()
+    document.getElementById("iosave").value = JSON.stringify(board) + JSON.stringify([maxDepth, players, startLayers, ruleSet])
+}
+
+function saveGameToLocal() {
+    localStorage.setItem("currentSave", JSON.stringify(upgradedCells))
+    localStorage.setItem("currentSettings", JSON.stringify([maxDepth, players, startLayers, ruleSet]))
+}
+
+function setValue(id, value) {
+    document.getElementById(id).value = value
+}
+
+function loadGameFromLocal() {
+    let settings = JSON.parse(localStorage.getItem("currentSettings"))
+    maxDepth = settings[0]
+    setValue("mdRange", settings[0])
+    players = settings[1]
+    startLayers = settings[2]
+    setValue("startDepthRange", settings[2])
+    ruleSet = settings[3]
+    upgradedCells = JSON.parse(localStorage.getItem("currentSave"))
+    regenerateBoard()
+}
