@@ -13,6 +13,8 @@ canvas.setAttribute("height", baseWidth)
 let maxDepth = 2
 let players = 2 //max 8
 let startLayers = 1
+let savingName = "Save1"
+let loadingName = "Save1"
 const progressMode = 1
 let ruleSet = 1
 let currMaxLayer = 1;
@@ -373,8 +375,6 @@ function regenerateBoard() {
 
 }
 
-
-
 canvas.addEventListener("mousemove", selectHighlightedCell)
 canvas.addEventListener("mouseup", handleClicks)
 window.addEventListener("keypress", (e) => { if (e.key == "Enter") { zoomOut() } })
@@ -413,8 +413,7 @@ function generateSaveGame() {
 }
 
 function saveGameToLocal() {
-    localStorage.setItem("currentSave", JSON.stringify(upgradedCells))
-    localStorage.setItem("currentSettings", JSON.stringify([maxDepth, players, startLayers, ruleSet]))
+    localStorage.setItem(savingName, JSON.stringify([upgradedCells, [maxDepth, players, startLayers, ruleSet]]))
 }
 
 function setValue(id, value) {
@@ -422,13 +421,34 @@ function setValue(id, value) {
 }
 
 function loadGameFromLocal() {
-    let settings = JSON.parse(localStorage.getItem("currentSettings"))
-    maxDepth = settings[0]
-    setValue("mdRange", settings[0])
-    players = settings[1]
-    startLayers = settings[2]
-    setValue("startDepthRange", settings[2])
-    ruleSet = settings[3]
-    upgradedCells = JSON.parse(localStorage.getItem("currentSave"))
+    let saveFile = JSON.parse(localStorage.getItem(loadingName))
+    maxDepth = saveFile[1][0]
+    setValue("mdRange", saveFile[1][0])
+    players = saveFile[1][1]
+    startLayers = saveFile[1][2]
+    setValue("startDepthRange", saveFile[1][2])
+    ruleSet = saveFile[1][3]
+    upgradedCells = saveFile[0]
     regenerateBoard()
 }
+
+function populateSaveNames() {
+    let names = Object.keys(localStorage)
+
+    for (i = 0; i < names.length; i++) {
+        addOptionTagToSelect(names[i])
+    }
+}
+
+function addOptionTagToSelect(value) {
+    if (value == "debug") {
+        return
+    }
+
+    let temp = document.createElement("option")
+    temp.value = value
+    temp.innerHTML = value
+    document.getElementsByTagName("select")[0].appendChild(temp)
+}
+
+populateSaveNames()
