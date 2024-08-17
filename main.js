@@ -203,9 +203,15 @@ function fillSpace(layer, skippedX, skippedY, subCellPos, colour) {
 }
 
 function highlightCell(e) {
+    
+    if(window.matchMedia("(pointer: coarse)").matches){// detects mobile users for better experience
+        return
+    }
+    
     context.fillStyle = 'green';
 
     context.fillRect(highlightedCell[0], highlightedCell[1], 297, 297);
+    
 
 }
 
