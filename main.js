@@ -1,6 +1,31 @@
 const canvas = document.getElementById("Canvas")
 const context = canvas.getContext('2d');
 
+function handlesetting(id, functionstr, inpType, placeholder = null, initValue=null min = null, max = null){
+    let superElem = document.createElement("span")
+    
+    let elem = docuemnt.createElement("input")
+    elem.value = initVakue
+    elem.min = min
+    elem.max = max
+    elem.placeholder = placeholder
+    elem.id = id
+    elem.addEventListener(inpType, functionstr)
+    document.querySelectorAll("#info")[0].appendChild(elem).appendChild(document.createElement("br")) 
+    
+}    
+settings = [
+    ["players", "players = this.value", "number", "# of players", 2, 2, 8],
+    ["players", "players = this.value", "number", "# of players", 2, 2, 8],
+    ["players", "players = this.value", "number", "# of players", 2, 2, 8],
+    ["players", "players = this.value", "number", "# of players", 2, 2, 8],
+    ["players", "players = this.value", "number", "# of players", 2, 2, 8],
+    ["players", "players = this.value", "number", "# of players", 2, 2, 8]
+
+
+
+
+
 print("a")
 
 const baseWidth = 891
