@@ -21,12 +21,12 @@ settings = [
     ["players", "players = this.value", "number", "# of players", 2, 2, 8],
     ["players", "players = this.value", "number", "# of players", 2, 2, 8],
     ["players", "players = this.value", "number", "# of players", 2, 2, 8]
+]
 
 
 
 
 
-print("a")
 
 const baseWidth = 891
 context.strokeStyle = 'black';
