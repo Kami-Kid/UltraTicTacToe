@@ -1,7 +1,7 @@
 const canvas = document.getElementById("Canvas")
 const context = canvas.getContext('2d');
 
-function handlesetting(id, functionstr, inpType, placeholder = null, initValue=null min = null, max = null){
+function handlesetting(id, functionstr, inpType, placeholder = null, initValue=null, min = null, max = null){
     let superElem = document.createElement("span")
     
     let elem = docuemnt.createElement("input")
