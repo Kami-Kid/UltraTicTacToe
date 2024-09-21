@@ -23,7 +23,7 @@
 <body>
     <Canvas id="Canvas" width="1920" height="941"></Canvas>
 
-    <div style="left: 950px; position: absolute; top: 200px; user-select: none; width: 250px;" id = "info">
+    <div style="left: 950px; position: absolute; top: 200px; user-select: none; width: 250px;" id="info">
         <p>
             Click on a cell to change that mark that cell </br>
             Click on an inner board to zoom into that board </br>
@@ -42,7 +42,10 @@
         <button id="loadbtn" onclick="loadGameFromLocal()">Load Game</button>
         <select onchange="loadingName = this.value"></select>
         <br>
-        <input type="number" onchange="players = this.value" min="2" max="8" >
+        <input type="number" onchange="players = this.value" min="2" max="8" width="10">
+        <span>players</span>
+        <br>
+        <input type="checkbox" onchange="displayLocked = this.value"><span>show locked grids</span>
         <!-- <button id="exportbtn">Export Game</button>
         <button id="importbtn">Import Game</button>
         <input type="text" id="iosave"> -->

@@ -1,9 +1,9 @@
 const canvas = document.getElementById("Canvas")
 const context = canvas.getContext('2d');
 
-function handlesetting(id, functionstr, inpType, placeholder = null, initValue=null, min = null, max = null){
+function handlesetting(id, functionstr, inpType, placeholder = null, initValue = null, min = null, max = null) {
     let superElem = document.createElement("span")
-    
+
     let elem = docuemnt.createElement("input")
     elem.value = initVakue
     elem.min = min
@@ -11,9 +11,9 @@ function handlesetting(id, functionstr, inpType, placeholder = null, initValue=n
     elem.placeholder = placeholder
     elem.id = id
     elem.addEventListener(inpType, functionstr)
-    document.querySelectorAll("#info")[0].appendChild(elem).appendChild(document.createElement("br")) 
-    
-}    
+    document.querySelectorAll("#info")[0].appendChild(elem).appendChild(document.createElement("br"))
+
+}
 settings = [
     ["players", "players = this.value", "number", "# of players", 2, 2, 8],
     ["players", "players = this.value", "number", "# of players", 2, 2, 8],
@@ -35,6 +35,11 @@ context.strokeStyle = 'black';
 canvas.setAttribute("width", baseWidth)
 canvas.setAttribute("height", baseWidth)
 
+
+
+let displyingLocks = false
+let minimiseHighlights = false
+let displayLocked = false
 let maxDepth = 2
 let players = 2 //max 8
 let startLayers = 1
@@ -187,6 +192,16 @@ let timesRun = 0
 
 
 function recursiveFill(layer, subBoard, skippedX = 0, skippedY = 0, starti) {
+    if (displayLocked && displyingLocks) {
+        for (i = 0; i < 9; i++) {
+            if (i === lastMove.at(-1)) {
+                i++
+            }
+            let temp = posToCoords(0, i)
+            context.fillStyle = "rgba(0,0,0,0.2)"
+            context.fillRect(temp[0], temp[1], 300, 300)
+        }
+    }
     if (layer > 4) {
         return starti
     }
@@ -227,16 +242,27 @@ function fillSpace(layer, skippedX, skippedY, subCellPos, colour) {
 
 }
 
+function showLockedGrids() {
+    for (i = 0; i < 9; i++) {
+        if (i === lastMove.at(-1)) {
+            i++
+        }
+        context.fillStyle = "rgba(0,0,0,0.3)"
+        context.fillRect(...posToCoords(0, i), 300, 300)
+    }
+}
+
 function highlightCell(e) {
-    
-    if(window.matchMedia("(pointer: coarse)").matches){// detects mobile users for better experience
+
+    if (window.matchMedia("(pointer: coarse)").matches) { // detects mobile users for better experience
         return
     }
-    
-    context.fillStyle = 'green';
+
+
+    context.fillStyle = 'rgba(10,220,20,0.3)';
 
     context.fillRect(highlightedCell[0], highlightedCell[1], 297, 297);
-    
+
 
 }
 
@@ -320,6 +346,9 @@ function saveBoard(iters = 0, moveMade) {
     currLayer = 1
     currMoves.push(moveMade)
     lastMove = JSON.parse(JSON.stringify(currMoves))
+    if (typeof(board[lastMove.at(-1)]) === "object") {
+        displyingLocks = true
+    }
     currMoves = []
     if (checkWin() !== -1) {
         won = checkWin()
@@ -417,6 +446,7 @@ function canActHere(metaCell) {
             return true
         case 1:
             if (typeof(board[lastMove.at(-1)]) === "object" && currLayer === 1) {
+                showLockedGrids()
                 return metaCell === lastMove.at(-1)
             }
             return true
