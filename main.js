@@ -192,7 +192,7 @@ let timesRun = 0
 
 
 function recursiveFill(layer, subBoard, skippedX = 0, skippedY = 0, starti) {
-    if (layer === 1 && displayLocked && displyingLocks) {
+    if (layer === 1 && displayLocked && typeof(board[lastMove.at(-1)]) === "object") {
         for (i = 0; i < 9; i++) {
             if (i === lastMove.at(-1)) {
                 i++
