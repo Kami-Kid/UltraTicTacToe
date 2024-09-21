@@ -448,7 +448,6 @@ function canActHere(metaCell) {
             return true
         case 1:
             if (typeof(board[lastMove.at(-1)]) === "object" && currLayer === 1) {
-                showLockedGrids()
                 return metaCell === lastMove.at(-1)
             }
             return true
