@@ -197,9 +197,9 @@ function recursiveFill(layer, subBoard, skippedX = 0, skippedY = 0, starti) {
             if (i === lastMove.at(-1)) {
                 i++
             }
-            let temp = posToCoords(0, i)
+            
             context.fillStyle = "rgba(0,0,0,0.2)"
-            context.fillRect(temp[0], temp[1], 300, 300)
+            context.fillRect(297*(i%3), 297*div(i,3), 297, 297)
         }
     }
     if (layer > 4) {
