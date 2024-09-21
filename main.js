@@ -192,7 +192,7 @@ let timesRun = 0
 
 
 function recursiveFill(layer, subBoard, skippedX = 0, skippedY = 0, starti) {
-    if (displayLocked && displyingLocks) {
+    if (layer === 1 && displayLocked && displyingLocks) {
         for (i = 0; i < 9; i++) {
             if (i === lastMove.at(-1)) {
                 i++
@@ -349,6 +349,8 @@ function saveBoard(iters = 0, moveMade) {
     if (typeof(board[lastMove.at(-1)]) === "object") {
         displyingLocks = true
     }
+    else{
+        displayingLocks = false}
     currMoves = []
     if (checkWin() !== -1) {
         won = checkWin()
