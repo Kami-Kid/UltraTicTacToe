@@ -49,7 +49,7 @@
         <br>
         <button onclick="zoomOut()"> Zoom Out</button>
         <br>
-        <input type="text" onchange="dumbAiPlayers = this.value.split(',')" > <span>enable ai players:idx1,idx2...</span>
+        <input type="text" onchange="dumbAiPlayers = this.value.split(',').map(Number)" > <span>enable ai players:idx1,idx2...</span>
         <!-- <button id="exportbtn">Export Game</button>
         <button id="importbtn">Import Game</button>
         <input type="text" id="iosave"> -->
