@@ -36,7 +36,7 @@ canvas.setAttribute("width", baseWidth)
 canvas.setAttribute("height", baseWidth)
 
 
-
+let dumbAiPlayers = []
 let displyingLocks = false
 let minimiseHighlights = false
 let displayLocked = false
@@ -185,6 +185,18 @@ function update() {
     }
 
     highlightCell()
+
+    if(dumbAiPlayers.length === 0){
+        if(player in dumbAiPlayers){
+            dumbAiMove()
+        }
+    }
+}
+
+function dumbAiMove(){
+    while(handleMove(Math.floor(9*Math.random() ) ) ){
+        return
+    }
 }
 
 let timesRun = 0
@@ -294,13 +306,13 @@ function handleMove(metaCell) {
             currMoves.push(metaCell)
             if (currMoves.length > maxDepth) {
                 currMoves.pop()
-                return
+                return 1
             }
             currMaxLayer += currMoves.length > currMaxLayer
             upgradedCells.push(currMoves)
             setSelecting(selecting - 1)
             regenerateBoard()
-            return
+            return 1
         }
         currBoard[metaCell] = currPlayer
         currPlayer += 1
