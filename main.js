@@ -186,8 +186,8 @@ function update() {
 
     highlightCell()
 
-    if(dumbAiPlayers.length === 0){
-        if(player in dumbAiPlayers){
+    if(dumbAiPlayers.length !== 0){
+        if(currPlayer in dumbAiPlayers){
             dumbAiMove()
         }
     }
